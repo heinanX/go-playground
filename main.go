@@ -17,9 +17,12 @@ func main() {
 	age := 34 //declares and sets value at the same timeL
 	name := "Carly"
 
+	// specifying the value %s = string, and %d = digit
 	fmt.Printf("Hello %s. You seem to be %d years old\n", name, age)
+	// to simplify we may instead use %v (=value)
+	fmt.Printf("Hello %v. You seem to be %v years old\n", name, age)
 
-	if strings.Contains(name, "Carly") {
+	if strings.Contains(strings.ToLower(name), "carly") {
 		fmt.Println("That's a good name")
 	} else {
 		fmt.Println("You should change")
