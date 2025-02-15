@@ -2,7 +2,9 @@ package assignments
 
 import (
 	"fmt"
+	"math/rand"
 	"strings"
+	"time"
 )
 
 // 1. Write a console application that prints Hello World
@@ -335,3 +337,115 @@ func FastFoodOrder() {
 }
 
 // # ---------------------------------------------------	LOOPITY LOOPS
+
+// 1. LOOP #1
+// Create a program that prints the numbers from 0 to 10 on the screen.
+
+func LoopyTens() {
+	n := 0
+	for n <= 10 {
+		fmt.Print(n)
+		n++
+	}
+}
+
+// 2. LOOP #2
+// Create a program where the user inputs two numbers.
+// Then, have the program print all the numbers between these two numbers on the screen.
+
+func NumberInbetween() {
+	num1 := intInput("Enter start number: ")
+	num2 := intInput("Enter end number: ")
+	var start int
+	var end int
+
+	if num1 < num2 {
+		start = num1
+		end = num2
+	} else {
+		start = num2
+		end = num1
+	}
+	i := start
+	for i < end {
+		fmt.Printf("%d ", i)
+		i++
+	}
+}
+
+// 3. LOOP #3
+// Create a program where the user:
+// - Inputs two numbers.
+// - Then, print the sum of the two numbers.
+// - Then, ask the question: "Do you want to continue? (Y/N)".
+// - If the user answers "Y", repeat steps a-c.
+// - If the user answers "N", stop the program.
+
+func AddNumbers() {
+	for {
+		num1 := intInput("Enter number: ")
+		num2 := intInput("Enter second number: ")
+		var repeat string
+
+		fmt.Println("Sum: ", num1+num2)
+		fmt.Print("Do you want to continue? (Y/N)")
+		fmt.Scan(&repeat)
+		repeat = strings.ToLower(repeat)
+		if repeat != "y" {
+			break
+		}
+	}
+}
+
+// 4. LOOP #4
+// Ask the user to input a number. Save the value in a variable.
+// Repeat this 10 times. For each input, add the entered value to the variable's value.
+// When done, print: "The sum of what you entered is: <sum>."
+
+func Number4() {
+	sum := 0
+	for i := 1; i <= 10; i++ {
+		userInput := intInput("Enter a number: ")
+		sum = sum + userInput // (improvement: sum += userInput)
+	}
+	fmt.Println(sum)
+
+}
+
+// 5. LOOP #5
+// Create a program where the user inputs a number.
+// Then, have the program print all the numbers less than the entered number but greater than 0.
+// Solve this using a loop.
+
+func PrintRange() {
+
+	userInput := intInput("Enter a number: ")
+	for i := userInput - 1; i > 0; i-- {
+		fmt.Println(userInput)
+	}
+
+}
+
+// 6. Rolling dice
+//Roll two dice and display the result. Repeat until the user does not answer 'y' or 'yes'.
+// IMPROVEMENT: Added time delay between prints
+
+func DiceRoll() {
+	var repeat string
+	for {
+		fmt.Println("Rolling the dice...")
+		time.Sleep(1 * time.Second)
+		fmt.Println("The values are...")
+		time.Sleep(1 * time.Second)
+		fmt.Println(rand.Intn(6) + 1)
+		fmt.Println(rand.Intn(6) + 1)
+		fmt.Print("Roll the dice again? Y/N ")
+		fmt.Scan(&repeat)
+
+		repeat = strings.ToLower(repeat)
+
+		if repeat != "y" {
+			break
+		}
+	}
+}
