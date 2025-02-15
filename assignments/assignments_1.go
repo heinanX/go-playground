@@ -59,5 +59,5 @@ func FirstAndLastName() {
 	fmt.Print("Enter your last name: ")
 	fmt.Scanln(&lastname)
 
-	fmt.Printf("Your name is: %s, %s/n", lastname, firstname)
+	fmt.Printf("Your name is: %s, %s", lastname, firstname)
 }
