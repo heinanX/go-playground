@@ -27,7 +27,7 @@ func PrintDate() {
 
 //Explainantion: Everything is written in one long sentence since there are no line breaks. This would be avoidable by using Println function from the fmt package.
 
-// VARIABLES
+// # ---------------------------------------------------	VARIABLES
 
 // 3. String and int
 // "Create a string variable name with your name.
@@ -84,9 +84,254 @@ func PrintNameFiveTimes() {
 	fmt.Print(nameRepeated)
 }
 
-// IF-STATEMENTS
+// # ---------------------------------------------------	IF-STATEMENTS
 
+// 1. Greate than ten
 // Ask the user to enter a number.
 // Check if it's greater than 10.
-// If it is, print "The number is greater than 10."
-// If it's not, print "The number is less than 10."
+// If it is, print "The number is greater than 10"
+// If it's not, print "The number is less than 10"
+
+func GreaterThanTen() {
+	var num int
+	var text string
+
+	fmt.Print("Enter a Number: ")
+	_, err := fmt.Scanln(&num)
+	if err != nil {
+		fmt.Println("It doesn't seem to be a number.")
+		return
+	}
+
+	if num > 10 {
+		text = "The number is greater than 10"
+	} else {
+		text = "The number is less than 10"
+	}
+	fmt.Println(text)
+
+}
+
+// VALIDATION FUNCTION FOR FUTURE INT INPUTS
+func intInput(text string) int {
+	var input int
+	for {
+		fmt.Print(text)
+		_, err := fmt.Scan(&input)
+		if err != nil {
+			fmt.Println("It doesn't seem to be a number. Please try again.")
+			// Clear the input buffer
+			fmt.Scanln()
+		} else {
+			return input
+		}
+	}
+}
+
+// 2. Order Milk
+// Ask the user how many cartons of milk are left.
+// If it's less than 10, print "Order 40 more."
+// If it's between 10 and 20, print "Order 20 more."
+// Otherwise, print "You don't need to order any milk."
+
+func OrderMilk() {
+	num := intInput("How many cartons of milk are left? ")
+
+	if num < 10 {
+		fmt.Println("Order 40 more.")
+	} else if num >= 10 && num <= 20 {
+		fmt.Println("Order 20 more.")
+	} else {
+		fmt.Println("You don't need to order any milk.")
+	}
+
+}
+
+// 3. Largest Number
+// Ask the user to enter two numbers: num1 and num2.
+// Store the largest number of the two in a third variable called largest.
+// Print: The largest number is <>
+
+func LargestNum() {
+	var largest int
+
+	num1 := intInput("Enter a number: ")
+
+	num2 := intInput("Enter another number: ")
+
+	if num1 > num2 {
+		largest = num1
+	} else {
+		largest = num2
+	}
+
+	fmt.Printf("The largest number is %d", largest)
+}
+
+// 4. Largest Number
+// repeat task 3 but with three inputs.
+func LargestNum2() {
+	var largest int
+
+	num1 := intInput("Enter a number: ")
+
+	num2 := intInput("Enter a second number: ")
+
+	num3 := intInput("Enter a third number: ")
+
+	if num1 >= num2 && num1 >= num3 { //Improvement: By checking if they are greater or _equal_ to the other two numbers, we eliminate the risk of running unnecessary code.
+		largest = num1
+	} else if num2 >= num1 && num2 >= num3 {
+		largest = num2
+	} else {
+		largest = num3
+	}
+
+	fmt.Printf("The largest number is %d", largest)
+}
+
+// 5. Fare Calculator
+// Ask the user to enter which category they belong to: adult, senior, or student.
+//   If they are a senior or a student, the trip costs 20 SEK.
+//   If they are an adult, the trip costs 30 SEK.
+//   Otherwise, inform the user that they have entered an incorrect category.
+
+//Original:
+// func CalcFare() {
+// 	var cat string
+
+// 	fmt.Print("Enter your category (student, senior, adult): ")
+// 	fmt.Scanln(&cat)
+
+// 	if cat == "senior" || cat == "student" {
+// 		fmt.Println("Your fare is 20 SEK")
+// 	} else if cat == "adult" {
+// 		fmt.Println("Your fare is 30 SEK")
+// 	} else {
+// 		fmt.Println("Your input is invalid")
+// 		CalcFare()
+// 	}
+// }
+
+// Disadvantage: Every time a function calls itself, there’s overhead involved—allocating memory, maintaining the stack, etc.
+// It may also cause stack overflow as the task is added to the stack everytime an invalid response is given.
+// For simple tasks like user input validation, loops are more efficient and readable.
+
+// Improved:
+func CalcFare() {
+	var cat string
+
+	for {
+		fmt.Print("Enter your category (student, senior, adult): ")
+		fmt.Scanln(&cat)
+
+		if cat == "senior" || cat == "student" {
+			fmt.Println("Your fare is 20 SEK")
+			break
+		} else if cat == "adult" {
+			fmt.Println("Your fare is 30 SEK")
+			break
+		} else {
+			fmt.Println("Your input is invalid. Please enter 'student', 'senior', or 'adult'.")
+		}
+	}
+}
+
+// 6. Enter your birth year
+//	 Ask the user to enter their birth year.
+//   If it is greater than or equal to 1980 but less than 1990, print:
+//   "You were born in the 1980s."
+//   If it is greater than or equal to 1990 but less than 2000, print:
+//   "You were born in the 1990s."
+//   If it is less than 1980 or greater than or equal to 2000, print:
+//   "You were not born in the 1980s or 1990s."
+
+func CheckBirthYear() {
+	birthyear := intInput("Enter your year of birth? ")
+
+	if birthyear >= 1980 && birthyear < 1990 {
+		fmt.Println("You were born in the 1980s!")
+	} else if birthyear >= 1990 && birthyear < 2000 {
+		fmt.Println("You were born in the 1990s!")
+	} else {
+		fmt.Println("You were not born in the 1980s or 1990s.")
+	}
+}
+
+// 7. Are you Scandinavian?
+// 	Ask the user for their country.
+//  If it's Sweden, Denmark, or Norway, print: "You live in Scandinavia."
+//  Otherwise, print: "You don't live in Scandinavia."
+
+func IsScandinavian() {
+	var nationality string
+
+	fmt.Print("Where do you live? ")
+	fmt.Scanln(&nationality)
+
+	nationality = strings.ToLower(nationality)
+
+	if nationality == "sweden" || nationality == "denmark" || nationality == "norway" {
+		fmt.Println("You live in Scandinavia.")
+	} else {
+		fmt.Println("You don't live in Scandinavia.")
+	}
+}
+
+// 8. Fast Food Order
+//  Ask the user how much money they have. Then, ask if they have a discount.
+//  If the amount is between 15 and 25 and the user does not have a discount, print: "You can buy a small hamburger."
+//  If the amount is between 15 and 25 and the user has a discount, print: "You can buy a small hamburger and fries."
+//  If the amount is greater than 25 and less than or equal to 50 and the user does not have a discount, print: "You can buy a large hamburger."
+//  If the amount is greater than 25 and less than or equal to 50 and the user has a discount, print: "You can buy a large hamburger and fries."
+//  If the amount is greater than 60 or if it is between 50 and 60 and the user has a discount, print: "You can buy a meal with a drink."
+
+// func FastFoodOrder() {
+// 	var discount string
+// 	money := intInput("How much money do you have? ")
+// 	fmt.Print("Are you eligible for a discount? (yes/no)")
+// 	fmt.Scanln(&discount)
+// 	if discount != "yes" && money >= 15 && money <= 25 {
+// 		fmt.Println("You can buy a small hamburger.")
+// 	} else if discount == "yes" && money >= 15 && money <= 25 {
+// 		fmt.Println("You can buy a small hamburger and fries.")
+// 	} else if discount != "yes" && money > 25 && money <= 50 {
+// 		fmt.Println("You can buy a large hamburger.")
+// 	} else if discount == "yes" && money > 25 && money <= 50 {
+// 		fmt.Println("You can buy a large hamburger and fries.")
+// 	} else if discount == "yes" && money > 50 {
+// 		fmt.Println("You can buy a meal with a drink.")
+// 	} else {
+// 		fmt.Println("Sorry, bro. You need to save up some more!")
+// 	}
+// }
+
+// IMPROVED:
+
+func FastFoodOrder() {
+	var discount string
+	money := intInput("How much money do you have? ")
+	fmt.Print("Are you eligible for a discount? (yes/no) ")
+	discount = strings.ToLower(discount)
+	fmt.Scanln(&discount)
+
+	if money >= 15 && money <= 25 {
+		if discount == "yes" { // create if statement inside the if statement to prevent code repeats
+			fmt.Println("You can buy a small hamburger and fries.")
+		} else {
+			fmt.Println("You can buy a small hamburger.")
+		}
+	} else if money > 25 && money <= 50 {
+		if discount == "yes" {
+			fmt.Println("You can buy a large hamburger and fries.")
+		} else {
+			fmt.Println("You can buy a large hamburger.")
+		}
+	} else if money > 60 || (money >= 50 && discount == "yes") {
+		fmt.Println("You can buy a meal with a drink.")
+	} else {
+		fmt.Println("Sorry, bro. You need to save up some more!")
+	}
+}
+
+// # ---------------------------------------------------	LOOPITY LOOPS
