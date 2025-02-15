@@ -1,8 +1,11 @@
 package assignments
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-//1.  Write a console application that prints Hello World
+// 1. Write a console application that prints Hello World
 func PrintGreeting() {
 	fmt.Println("Hello World")
 }
@@ -26,10 +29,10 @@ func PrintDate() {
 
 // VARIABLES
 
-//3. String and int
-// 		"Create a string variable name with your name.
-// 		Create an int variable age with your age.
-// 		Then print 'My name is Kalle (the content of name) and I am 27 (the content of age) years old.'"
+// 3. String and int
+// "Create a string variable name with your name.
+//  Create an int variable age with your age.
+//  Then print 'My name is Kalle (the content of name) and I am 27 (the content of age) years old.'"
 
 func StringAndInt() {
 	name := "Linda"
@@ -37,17 +40,17 @@ func StringAndInt() {
 	fmt.Printf("My name is %s and I'm %d years old", name, age)
 }
 
-//4. First Name and Last Name
-//Create an application where the user enters their first and last name.
+// 4. First Name and Last Name
+// Create an application where the user enters their first and last name.
 
-//    a. Print "Enter your first name:". Capture the value in a variable.
-//    b. Have the cursor wait for your input on the same line.
-//    c. Do the same for the last name.
-//    d. Then print the names in reverse order.
-//    e. Make sure the result looks like this:
-// 		Enter your first name: Jane
-//		Enter your last name: Doe
-//		Your name is: Doe, Jane
+//  Print "Enter your first name:". Capture the value in a variable.
+//  Have the cursor wait for your input on the same line.
+//  Do the same for the last name.
+//  Then print the names in reverse order.
+//  Make sure the result looks like this:
+// 	  Enter your first name: Jane
+//	  Enter your last name: Doe
+//	  Your name is: Doe, Jane
 
 func FirstAndLastName() {
 	var firstname string
@@ -61,3 +64,29 @@ func FirstAndLastName() {
 
 	fmt.Printf("Your name is: %s, %s", lastname, firstname)
 }
+
+// 5. String Operators
+
+// Ask the user to input their name. Store it in a variable called name.
+// Create a new variable nameRepeated with the name repeated five times in a row. Print the new variable.
+// Example output:
+//	 What is your name: Stefan
+//	 StefanStefanStefanStefanStefan
+
+func PrintNameFiveTimes() {
+	var name string
+
+	fmt.Print("What's your name: ")
+	fmt.Scanln(&name)
+
+	nameRepeated := strings.Repeat(name, 5)
+
+	fmt.Print(nameRepeated)
+}
+
+// IF-STATEMENTS
+
+// Ask the user to enter a number.
+// Check if it's greater than 10.
+// If it is, print "The number is greater than 10."
+// If it's not, print "The number is less than 10."
