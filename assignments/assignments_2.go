@@ -3,6 +3,7 @@ package assignments
 import (
 	"fmt"
 	"strings"
+	"unicode"
 )
 
 // STRUCTURES
@@ -111,6 +112,36 @@ func LocateLetterPosition() {
 // You have the string variable 'namn="kurt andersson"';
 // Write code so that the first name and last name in the variable 'namn' are capitalized.
 // The result should be: "Kurt Andersson"
+
+func CapitalizeWords() {
+	name := "kurt andersson"
+	slice := strings.Fields(name)
+	for i, word := range slice {
+		x := strings.Split(word, "")
+		x[0] = strings.ToUpper(x[0])
+		joined := strings.Join(x, "")
+		slice[i] = joined
+	}
+	result := strings.Join(slice, " ")
+	fmt.Print(result)
+}
+
+// USING RUNES SOLUTION
+// note:  While word[0] gives the byte representation of the character,
+// wrapping it with rune() converts it into a rune, which represents the character in Unicode.
+
+func CapitalizeWords2() {
+	name := "kurt andersson"
+	slice := strings.Fields(name)
+
+	for i, word := range slice {
+		slice[i] = string(unicode.ToUpper(rune(word[0]))) + word[1:]
+	}
+
+	result := strings.Join(slice, " ")
+
+	fmt.Print(result)
+}
 
 // 4. STRING #4
 // You have a string with the text "Detta är en sträng som du skall ändra".
