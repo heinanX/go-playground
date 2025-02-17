@@ -99,6 +99,14 @@ func ConcatString() {
 // - Find the first occurrence of the letter 'w' (which position in the string)
 // - Find the last occurrence of the letter 'o' (which position in the string)
 
+func LocateLetterPosition() {
+	greeting := "Hello, world"
+	position1 := strings.Index(greeting, "w")
+	position2 := strings.LastIndex(greeting, "o")
+	fmt.Printf("The first occurrence of 'w' is at index: %d, and the last occurrence of 'o' is at index: %d.", position1, position2)
+
+}
+
 // 3. STRING #3
 // You have the string variable 'namn="kurt andersson"';
 // Write code so that the first name and last name in the variable 'namn' are capitalized.
