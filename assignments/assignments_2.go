@@ -161,6 +161,24 @@ func ReplaceContent() {
 // that it contains an '@' symbol and that there is a '.' with 2 or 3 characters after it.
 // Notify the user whether the address is correct or invalid.
 
+func ValidateEmail() {
+	var inputValue string
+	fmt.Print("Enter your email: ")
+	fmt.Scan(&inputValue)
+
+	if strings.Contains(inputValue, "@") && strings.Contains(inputValue, ".") {
+		lastDotIndex := strings.LastIndex(inputValue, ".")
+		suffix := inputValue[lastDotIndex+1:]
+		if len(suffix) < 2 || len(suffix) > 3 {
+			fmt.Printf("invalid entry '%v'", inputValue)
+			return
+		}
+		fmt.Print("Email validated!")
+	} else {
+		fmt.Print("Email is missing either @ or .xxx")
+	}
+}
+
 // 6. STRING #6
 // Ask the user to input a word or sentence.
 // The program should check if the word is a palindrome, meaning if the word is the same
