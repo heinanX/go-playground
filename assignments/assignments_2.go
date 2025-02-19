@@ -148,6 +148,13 @@ func CapitalizeWords2() {
 // Replace all spaces in the string with the '*' character.
 // Then calculate how many occurrences of '*' there are in the string.
 
+func ReplaceContent() {
+	phrase := "This is a string that needs to be changed."
+	newPhrase := strings.ReplaceAll(phrase, " ", "*")
+	characterRepeats := strings.Count(newPhrase, "*")
+	fmt.Print(characterRepeats)
+}
+
 // 5. STRING #5
 // Ask the user to input an email address.
 // The program should check that the input is valid:
