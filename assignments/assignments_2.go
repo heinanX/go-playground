@@ -1,7 +1,9 @@
 package assignments
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 	"unicode"
 )
@@ -37,17 +39,18 @@ func FindGreatestNum() {
 // Ask if the user wants to continue (y or n).
 // When the user chooses not to continue, print out the longest name (most characters).
 
+// PERSONAL NOTE FOR IMPROVEMENT: add slice to store multiple names if two or more qualify as longest
 func NameSlice() {
 	var repeat string
 	nameList := []string{}
 	for {
 		var name string
 		fmt.Print("Enter a name to add it to the list: ")
-		fmt.Scan(&name)
+		fmt.Scanln(&name)
 		nameList = append(nameList, name)
 		fmt.Println(nameList)
 		fmt.Print("Do you want to continue (y or n): ")
-		fmt.Scan(&repeat)
+		fmt.Scanln(&repeat)
 		if repeat != "y" {
 			break
 		}
@@ -66,15 +69,6 @@ func NameSlice() {
 	}
 	fmt.Printf("Longest name in the list is %v with %v characters.", longestName, len(longestName))
 }
-
-// 3. Map
-// Create a banking application. First, create a menu with the following options:
-// - Create account
-// - Delete account
-// - List all account numbers
-// - List total balance
-// - List all account numbers and balance
-// You don’t need to worry about error handling in step 1.
 
 // STRING HANDLING
 
@@ -126,8 +120,8 @@ func CapitalizeWords() {
 	fmt.Print(result)
 }
 
-// USING RUNES SOLUTION
-// note:  While word[0] gives the byte representation of the character,
+// PERSONAL NOTE: USING RUNES SOLUTION
+// While word[0] gives the byte representation of the character,
 // wrapping it with rune() converts it into a rune, which represents the character in Unicode.
 
 func CapitalizeWords2() {
@@ -164,7 +158,7 @@ func ReplaceContent() {
 func ValidateEmail() {
 	var inputValue string
 	fmt.Print("Enter your email: ")
-	fmt.Scan(&inputValue)
+	fmt.Scanln(&inputValue)
 
 	if strings.Contains(inputValue, "@") && strings.Contains(inputValue, ".") {
 		lastDotIndex := strings.LastIndex(inputValue, ".")
@@ -186,6 +180,44 @@ func ValidateEmail() {
 // Example palindromes: "anna", "otto", or the sentence "ni talar bra latin".
 // Spaces should be ignored. Ignore punctuation as well.
 
+func CheckIfPalindrome() {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Enter a word or a sentence: ")
+	input, _ := reader.ReadString('\n')
+	input = strings.TrimSpace(input)
+	var filteredRunes []rune
+
+	for _, rune := range input {
+		if unicode.IsLetter(rune) {
+			filteredRunes = append(filteredRunes, unicode.ToLower(rune))
+		}
+	}
+
+	length := len(filteredRunes)
+
+	for i := range length / 2 {
+		if filteredRunes[i] != filteredRunes[length-1-i] {
+			fmt.Printf("\"%v\" is not a palindrome.", input)
+			return
+		}
+	}
+	fmt.Printf("\"%v\" is a palindrome.", input)
+
+}
+
+// PERSONAL NOTES:
+// 1. OG FOR LOOP:
+// for i := 0; i < length/2; i++ {
+// 	if runes[i] != runes[length -1 -i] {
+// 		fmt.Printf("%v is not a palindrome.", input)
+// 		return
+// 	}
+// }
+// update: replacing a 3-clause for i := 0; i < n; i++ {} loop by for i := range n {}, added in go1.22;
+
+// 2.
+// bufio.NewReader(os.Stdin) allows me to store complete sentences
+
 // # ------------------------------------------------------ FUNCTIONS
 
 // 1. Add
@@ -193,16 +225,41 @@ func ValidateEmail() {
 // The method should take two parameters of type string and concatenate them into one string,
 // then return the new value. Call the new method and print the result to the screen.
 
+func Joined(a string, b string) string {
+	word := a + " " + b
+	return word
+}
+
 // 2. VAT (MOMS)
 // Create a function that calculates the VAT (Value Added Tax) for a given amount.
 // The amount should be a parameter of type float64.
 // The method should return the VAT value.
+
+func AddVAT(a float64) float64 {
+	vat := a * 0.25
+	sum := a + vat
+	return sum
+}
 
 // 3. LONGEST WORD
 // Create a method called HittaLangstaOrdet.
 // The method should take a slice of strings as a parameter.
 // It should loop through the array and return the longest word.
 // Is there a way to do this without needing to create a local longest variable or even using return?
+// Answer: no, it's not possible since I have to compare each element to something. also if the function doesn't return anything, I wont be able to store it inside a variable. I could still call on the function but it wouldn't do anything.
+
+func FindLongestWord(a []string) string {
+	var longestWord string
+	if len(a) != 0 {
+		longestWord = a[0]
+		for _, word := range a {
+			if len(word) > len(longestWord) {
+				longestWord = word
+			}
+		}
+	}
+	return longestWord
+}
 
 // 4. CALCULATE TAX
 // Create a function called CalculateTaxesOnSalary
@@ -212,3 +269,33 @@ func ValidateEmail() {
 // If the monthly salary is between 15,000 and 30,000, the tax is salary * 0.28
 // The method should return the calculated tax amount.
 // It should also return an error code (or nil) if the salary is negative (invalid input).
+
+// OG thoughts:
+// func CalculateTaxesOnSalary(salary float64) float64 || nil {
+// 	var vat float64
+// 	if salary >= 30000 {
+// 		vat = salary * 0.33
+// 	} else if salary < 15000 {
+// 		vat = salary * 0.12
+// 	} else if salary >= 15000 && salary = 30000 {
+// 		vat = salary * 0.28
+// 	} else {
+// 		return nil
+// 	}
+// 	return salary + vat
+// }
+
+func CalculateTaxesOnSalary(salary float64) *float64 {
+	var vat float64
+	if salary >= 30000 {
+		vat = salary * 0.33
+	} else if salary < 15000 {
+		vat = salary * 0.12
+	} else if salary >= 15000 && salary < 30000 {
+		vat = salary * 0.28
+	} else {
+		return nil
+	}
+	total := salary + vat
+	return &total
+}
