@@ -2,29 +2,22 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"heinanx20250204/assignments"
 )
 
 func main() {
-	//possible way to declare a variable but not used
-	// var age = 34
+	//assignments.CheckIfPalindrome()
 
-	// possible way to declare a variable and assign a value later
-	//var age uint8 (uint8 for better performance as it takes less memory than default int)
-	//... code
-	//age = 34
+	// words := []string{"dog", "giraffe", "dolphin", "rat", "crocodile"}
+	// printThis := assignments.FindLongestWord(words)
 
-	age := 34 //declares and sets value at the same timeL
-	name := "Carly"
-
-	// specifying the value %s = string, and %d = digit
-	fmt.Printf("Hello %s. You seem to be %d years old\n", name, age)
-	// to simplify we may instead use %v (=value)
-	fmt.Printf("Hello %v. You seem to be %v years old\n", name, age)
-
-	if strings.Contains(strings.ToLower(name), "carly") {
-		fmt.Println("That's a good name")
+	printThis := assignments.CalculateTaxesOnSalary(25000)
+	if printThis != nil {
+		fmt.Println("Total Salary with tax:", *printThis) // The asterisk dereferences the pointer to get the value that the pointer is pointing to, without it, it would only print the memory address
 	} else {
-		fmt.Println("You should change")
+		fmt.Println("Invalid salary")
 	}
+
+	// fmt.Print(printThis)
+
 }
