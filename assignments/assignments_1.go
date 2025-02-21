@@ -114,7 +114,7 @@ func GreaterThanTen() {
 
 }
 
-// VALIDATION FUNCTION FOR FUTURE INT INPUTS
+// VALIDATION FUNCTION FOR FUTURE INT INPUTS BECASUE I'M GETTING TIRED OF WRITING THE SAME LOGIC
 func intInput(text string) int {
 	var input int
 	for {
@@ -122,8 +122,7 @@ func intInput(text string) int {
 		_, err := fmt.Scan(&input)
 		if err != nil {
 			fmt.Println("It doesn't seem to be a number. Please try again.")
-			// Clear the input buffer
-			fmt.Scanln()
+			fmt.Scanln() // Clears the input buffer
 		} else {
 			return input
 		}
@@ -198,7 +197,7 @@ func LargestNum2() {
 //   If they are an adult, the trip costs 30 SEK.
 //   Otherwise, inform the user that they have entered an incorrect category.
 
-//Original:
+// Original Thought proscess:
 // func CalcFare() {
 // 	var cat string
 
@@ -308,7 +307,7 @@ func IsScandinavian() {
 // 	}
 // }
 
-// IMPROVED:
+// PERSONAL NOTES ON IMPROVEMENT:
 
 func FastFoodOrder() {
 	var discount string
@@ -318,7 +317,7 @@ func FastFoodOrder() {
 	fmt.Scanln(&discount)
 
 	if money >= 15 && money <= 25 {
-		if discount == "yes" { // create if statement inside the if statement to prevent code repeats
+		if discount == "yes" { // if statement inside the if statement prevents rewriting same code
 			fmt.Println("You can buy a small hamburger and fries.")
 		} else {
 			fmt.Println("You can buy a small hamburger.")
@@ -428,7 +427,7 @@ func PrintRange() {
 
 // 6. Rolling dice
 //Roll two dice and display the result. Repeat until the user does not answer 'y' or 'yes'.
-// IMPROVEMENT: Added time delay between prints
+// PERSONAL THOUGHTS ON IMPROVEMENT: Added time delay between prints
 
 func DiceRoll() {
 	var repeat string
